@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CipherCreator", "CipherCreator\CipherCreator.csproj", "{F874B59A-0C79-4DC2-A4AE-1B0675F488DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CipherCreator.Tests", "CipherCreator.Tests\CipherCreator.Tests.csproj", "{15BDE0D5-CA0E-431F-8C2A-55465F3EA7F9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F874B59A-0C79-4DC2-A4AE-1B0675F488DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F874B59A-0C79-4DC2-A4AE-1B0675F488DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F874B59A-0C79-4DC2-A4AE-1B0675F488DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F874B59A-0C79-4DC2-A4AE-1B0675F488DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15BDE0D5-CA0E-431F-8C2A-55465F3EA7F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15BDE0D5-CA0E-431F-8C2A-55465F3EA7F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15BDE0D5-CA0E-431F-8C2A-55465F3EA7F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15BDE0D5-CA0E-431F-8C2A-55465F3EA7F9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
