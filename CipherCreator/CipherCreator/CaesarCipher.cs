@@ -4,9 +4,8 @@ using CipherCreator;
 
 public class CaesarCipher : IDecode, IEncode
 {
-    static bool doNumbers = true;
 
-    public static string Encode(string input, int shift)
+    public static string Encode(string input, int shift , bool shiftNumbers = false)
     {
         if (string.IsNullOrEmpty(input)) return string.Empty;
         if (shift == 0) return input;
@@ -24,9 +23,9 @@ public class CaesarCipher : IDecode, IEncode
 
                 sb.Append(chr);
             }
-            else if (char.IsDigit(c) && doNumbers)
+            else if (char.IsDigit(c) && shiftNumbers)
             {
-                int number = int.Parse(c.ToString()) + 20;
+                int number = int.Parse(c.ToString()) + 20; // So it wont go negative ever
 
                 sb.Append((number + (shift % 10)) % 10);
             }
@@ -41,8 +40,8 @@ public class CaesarCipher : IDecode, IEncode
     
     public static string Decode(string input, int shift) => Encode(input, -shift);
 
-
-    private static Dictionary<char, double> frequencies = new() {
+#region Crack
+    private static readonly Dictionary<char, double> frequencies = new() {
         { 'E', 12.70 }, { 'T', 9.06 }, { 'A', 8.17 }, { 'O', 7.51 }, { 'I', 6.97 }, 
         { 'N', 6.75 }, { 'S', 6.33 }, { 'H', 6.09 }, { 'R', 5.99 }, { 'D', 4.25 }, 
         { 'L', 4.03 }, { 'C', 2.78 }, { 'U', 2.76 }, { 'M', 2.41 }, { 'W', 2.36 }, 
@@ -53,16 +52,41 @@ public class CaesarCipher : IDecode, IEncode
 
     public static string Crack(string encodedText)
     {
+        double bestDifference = double.MaxValue;
+        int bestShift = int.MaxValue;
+        
         foreach (int shift in Enumerable.Range(0, 26))
         {
-           // check each shift and then compare with the regular weights
            string decodedText = Decode(encodedText, shift);
 
+           var percents = decodedText
+               .Where(c => char.IsLetter(c))
+               .Select(c => char.ToUpper(c))
+               .GroupBy(c => c)
+               .Select( g => new
+                   {
+                       letter = g.Key , 
+                       percent = ((double)g.Count() / decodedText.Count(c => char.IsLetter(c))) * 100
+                   }
+               ).ToDictionary(x=>x.letter,x=>x.percent);
+           
+           
+           double totalAbsoluteDifference = frequencies
+               .Sum(f => Math.Abs(f.Value - (percents.ContainsKey(f.Key) ? percents[f.Key] : 0)));
+           
+           Console.WriteLine($"shift {shift}: {totalAbsoluteDifference} total absolute difference");
+
+           if (totalAbsoluteDifference < bestDifference)
+           {
+               bestDifference = totalAbsoluteDifference;
+               bestShift = shift;
+           }
+
         }
+        Console.WriteLine($"Best shift is {bestShift} with {bestDifference:00.00} difference.");
         
-        
-        return string.Empty;
+        return Decode(encodedText, bestShift);
     }
-    
+ #endregion   
     
 }

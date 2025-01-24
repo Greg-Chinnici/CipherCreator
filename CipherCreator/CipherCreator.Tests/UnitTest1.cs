@@ -17,9 +17,9 @@ public class UnitTest1
     [InlineData("5ZdlyWJYPPiPyqf4wAcHF4OiIU" , -2 , "3XbjwUHWNNgNwod2uYaFD2MgGS")]
     [InlineData("G7WSMjtdLwOSaycIqFeJzKXrpR", 17 ,"X4NJDakuCnFJrptZhWvAqBOigI")]
     [InlineData("G7WSMjtdLwOSaycIqFeJzKXrpR",-17 ,"P0FBVscmUfXBjhlRzOnSiTGayA")]
-    public void EncodeTest(string input , int rotation , string expected)
+    public void EncodeTestNumbersShift(string input , int rotation , string expected)
     {
-        string output = CaesarCipher.Encode(input, rotation);
+        string output = CaesarCipher.Encode(input, rotation , true);
         
         Assert.Equal(expected, output);
     }
