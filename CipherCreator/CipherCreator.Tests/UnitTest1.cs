@@ -4,6 +4,8 @@ public class UnitTest1
 {
     [Theory]
     [InlineData("hello", 0, "hello")]
+    [InlineData("hello", 13123, "axeeh")]
+    [InlineData("reallysmallnumber", -33993, "gtpaanhbpaacjbqtg")]
     [InlineData("hello", 3, "khoor")]
     [InlineData("hello", -1, "gdkkn")]
     [InlineData("1234", 0, "1234")]
@@ -17,7 +19,9 @@ public class UnitTest1
     [InlineData("5ZdlyWJYPPiPyqf4wAcHF4OiIU" , -2 , "3XbjwUHWNNgNwod2uYaFD2MgGS")]
     [InlineData("G7WSMjtdLwOSaycIqFeJzKXrpR", 17 ,"X4NJDakuCnFJrptZhWvAqBOigI")]
     [InlineData("G7WSMjtdLwOSaycIqFeJzKXrpR",-17 ,"P0FBVscmUfXBjhlRzOnSiTGayA")]
-    public void EncodeTestNumbersShift(string input , int rotation , string expected)
+    [InlineData(null , 0 , "")]
+    [InlineData("" , 13232 , "")]
+    public void EncodeTestCaesar(string input , int rotation , string expected)
     {
         string output = CaesarCipher.Encode(input, rotation , true);
         
@@ -28,7 +32,7 @@ public class UnitTest1
     [Theory]
     [InlineData("hello", 0, "hello")]
     [InlineData("ifmmp", 1, "hello")]
-    public void DecodeTest(string input, int rotation, string expected)
+    public void DecodeTestCaesar(string input, int rotation, string expected)
     {
         string output = CaesarCipher.Decode(input, rotation);
         
