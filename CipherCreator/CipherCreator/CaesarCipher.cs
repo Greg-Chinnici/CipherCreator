@@ -5,7 +5,7 @@ using CipherCreator;
 public class CaesarCipher : IDecode, IEncode
 {
 # region Encode/Decode
-    public static string Encode(string input, int shift , bool shiftNumbers = false)
+    public static string Encode(string input, int shift , bool shiftNumbers)
     {
         if (string.IsNullOrWhiteSpace(input)) return string.Empty;
         if (shift % 26 == 0) return input;
@@ -29,6 +29,12 @@ public class CaesarCipher : IDecode, IEncode
 
         return output.ToString();
     }
+
+    public static string Encode(string input, int shift)
+    {
+        return Encode(input , shift , false); 
+    }
+
 
     private static char shiftLetter(char letter, int shift)
     {
@@ -105,6 +111,7 @@ public class CaesarCipher : IDecode, IEncode
 
     private static double absoluteDifference(Dictionary<char,double> percents)
     {
+        
         return frequencies
             .Sum(f => Math.Abs(f.Value - (percents.ContainsKey(f.Key) ? percents[f.Key] : 0)));
     }
