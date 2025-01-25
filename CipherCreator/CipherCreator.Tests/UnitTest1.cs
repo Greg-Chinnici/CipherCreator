@@ -38,4 +38,13 @@ public class UnitTest1
         
         Assert.Equal(expected, output);
     }
+
+
+    [Theory]
+    [InlineData("hello", 3, "hlo el")]
+    public void ScytaleEncodeTest(string input, int width, string expected)
+    {
+        string output = ScytaleCipher.Encode(input, width);
+        Assert.Equal(expected, output);
+    }
 }
