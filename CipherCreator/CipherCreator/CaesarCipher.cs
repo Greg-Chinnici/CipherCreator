@@ -67,7 +67,8 @@ public class CaesarCipher : IDecode, IEncode
         { 'Z', 0.07 }
     };
 
-    public static string Crack(string encodedText)
+    // Only works correctly if the input text is encoded from english and at least a few words long
+    public static string Crack(string encodedText , bool showProgress= false)
     {
         double bestDifference = double.MaxValue;
         int bestShift = int.MaxValue;
@@ -80,7 +81,7 @@ public class CaesarCipher : IDecode, IEncode
            
            double totalAbsoluteDifference = absoluteDifference(percents);
            
-           Console.WriteLine($"shift {shift} or {26-shift}: {totalAbsoluteDifference} total absolute difference");
+           if (showProgress) Console.WriteLine($"shift {shift} or {26-shift}: {totalAbsoluteDifference} total absolute difference");
 
            if (totalAbsoluteDifference < bestDifference)
            {
@@ -89,7 +90,7 @@ public class CaesarCipher : IDecode, IEncode
            }
 
         }
-        Console.WriteLine($"Best shift is {bestShift} with {bestDifference:00.00} difference.");
+        Console.WriteLine($"Best shift is {bestShift} with a {bestDifference:00.00} difference.");
         
         return Decode(encodedText, bestShift);
     }

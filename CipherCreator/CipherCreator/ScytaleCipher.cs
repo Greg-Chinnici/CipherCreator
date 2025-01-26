@@ -4,7 +4,9 @@ namespace CipherCreator;
 public class ScytaleCipher : IEncode , IDecode
 {
     // https://en.wikipedia.org/wiki/Scytale
+    // It is also known as the Caesar Box Cipher
 
+    private static readonly char spacePlaceholder = '_';
     public static string Encode(string input, int NumberOfTurns)
     {
         if (string.IsNullOrEmpty(input)) return string.Empty;
@@ -16,24 +18,29 @@ public class ScytaleCipher : IEncode , IDecode
         for (int i = 0; i < input.Length; i += NumberOfTurns)
         {
             var v = input.Substring(i, NumberOfTurns ).ToCharArray();
-            rows.Add(v.ToArray());
+            rows.Add(v);
         }
         
         StringBuilder sb = new();
-        for (int i = 0; i < NumberOfTurns ; i++)
-        {
-            for (int j = 0; j < rows.Count; j++)
+        foreach (int i in Enumerable.Range(0, NumberOfTurns))
+            foreach (int j in Enumerable.Range(0, rows.Count))
             {
                 char toAdd = rows[j][i];
-                sb.Append(toAdd == ' ' ? '_' : toAdd );
+                sb.Append(toAdd == ' ' ? spacePlaceholder : toAdd );
             }
-        }
         
         return sb.ToString();
     }
 
-    public static string Decode(string input, int width)
+    public static string Decode(string input, int NumberOfTurns)
     {
-        throw new NotImplementedException();
+        List<char[]> rows = new List<char[]>();
+        for (int i = 0; i < input.Length; i += NumberOfTurns)
+        {
+            var v = input.Substring(i, NumberOfTurns ).ToCharArray();
+            rows.Add(v);
+        }
+        
+        return string.Empty;
     }
 }

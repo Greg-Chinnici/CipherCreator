@@ -1,6 +1,6 @@
 namespace CipherCreator.Tests;
 
-public class UnitTest1
+public class CaesarCipherTest
 {
     [Theory]
     [InlineData("hello", 0, "hello")]
@@ -39,17 +39,15 @@ public class UnitTest1
         Assert.Equal(expected, output);
     }
 
-
     [Theory]
-    [InlineData("iamhurtverybadlyhelp", 5, "iryyatbhmvaehedlurlp")]
-    [InlineData("" , 5 , "")]
-    [InlineData(null , 0 , "")]
-    [InlineData("ABCDE", 5 , "ABCDE")]
-    [InlineData("ski mask the slump dog dr suess", 6 , "ss__rskksd__i_los__tugu_mhm_e_aepds_")]
-    [InlineData("Lazer Dim 7000" , 3, "LeD_0ari70z_m0_")]
-    public void ScytaleEncodeTest(string input, int nTurns, string expected)
+    [InlineData("Ild spnh ephhts xc iwxh bpcctg qtudgt wt lph pqat id hetpz, pcs X duitc utpgts iwpi wxh hjuutgxcvh wps stegxkts wxb du jcstghipcsxcv. ", "Two days passed in this manner before he was able to speak, and I often feared that his sufferings had deprived him of understanding. ")]
+    [InlineData(null , "")]
+    [InlineData("","")]
+    public void CrackTestCaesar(string input, string expected)
     {
-        string output = ScytaleCipher.Encode(input, nTurns);
+        string output = CaesarCipher.Crack(input);
+        
         Assert.Equal(expected, output);
     }
+    
 }

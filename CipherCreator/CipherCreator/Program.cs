@@ -6,24 +6,20 @@ class Program
 {
     public static async Task Main(string[] args)
     {
-
-        //Console.WriteLine(CaesarCipher.Crack("Xli ibxirhih evq wepyxmrk kiwxyvi aew eppikih xs fi fewih sr er ergmirx Vsqer\ngywxsq, fyx rs orsar Vsqer asvo sj evx hitmgxw mx, rsv hsiw erc ibxerx Vsqer xibx\nhiwgvmfi mx. Lmwxsvmerw lezi mrwxieh hixivqmrih xlex xli kiwxyvi svmkmrexih jvsq\nNeguyiw-Psymw Hezmh'w 1784 temrxmrk Sexl sj xli Lsvexmm, almgl hmwtpecih e\nvemwih evq wepyxexsvc kiwxyvi mr er ergmirx Vsqer wixxmrk. Xli kiwxyvi erh mxw\nmhirxmjmgexmsr amxl ergmirx Vsqi aew ehzergih mr sxliv Jvirgl risgpewwmg evx"));
-
-        Console.WriteLine(ScytaleCipher.Encode("hello", 3));
-        Console.WriteLine(ScytaleCipher.Encode("greg chinnici", 2));
-        return;
+        Console.WriteLine("This program can Encrypt and Decrypt a string using a Caesar Cipher or a Scytale Cipher");
+        Console.WriteLine("If you cant come up with a message to send, use the 'ipsum' command to get some");
+        Console.WriteLine("shift in the context of the Skytale cipher is the number of turns on the pole");
+        Console.WriteLine("=======================================================================================");
         
-        TextService LoremIpsum = new TextService(new LoremIpsumClient());
-        TextService[] services = { LoremIpsum };
+        TextService LoremIpsum = new TextService(new LoremIpsumClient("medium"));
+        TextService DadJokes = new TextService(new DadJokeClient());
+        TextService RonSwansonQuotes = new TextService(new RonSwansonClient());
         
-        foreach (var service in services)
-            await UseTextService(service);
-
-        return;
+        TextService[] services = { LoremIpsum, DadJokes, RonSwansonQuotes };
         
         while (true)
         {
-            Console.Write("Enter a string to encode (or type 'quit' to exit): ");
+            Console.Write("Enter a string to encode (or type 'quit' to exit, or type 'ipsum' for some text): ");
             string input = Console.ReadLine();
 
             if (input.Equals("quit", StringComparison.OrdinalIgnoreCase))
@@ -44,26 +40,33 @@ class Program
                     Console.WriteLine("Invalid input. Please enter a valid integer.");
             }
 
-            string encoded = CaesarCipher.Encode(input, shift);
-            Console.WriteLine($"Encoded string: {encoded}");
+            if (input.Equals("ipsum", StringComparison.OrdinalIgnoreCase))
+            {
+                Random random = new Random();
+                input = await UseTextService(services[random.Next(services.Length)]);
+            }
             
-            string decoded = CaesarCipher.Decode(encoded, shift);
-            Console.WriteLine($"Decoded string: {decoded}");
+            UseCipher(input , shift);
         }
     }
 
-
-    public static async Task UseTextService(TextService service)
+    private static async Task<string> UseTextService(TextService service)
     {
-        string normal = await service.FetchString();
-        
-        Console.WriteLine(normal);
-        
-        string encoded_lorem = CaesarCipher.Encode(normal, 8);
-        
-        Console.WriteLine(encoded_lorem);
-        //Console.WriteLine(CaesarCipher.Decode(encoded_lorem , 8));
-        Console.WriteLine(CaesarCipher.Crack(encoded_lorem));
+        return await service.FetchString(); 
+    }
 
+    private static void UseCipher(string input, int shift)
+    {
+        string encodedCaesar = CaesarCipher.Encode(input, shift);
+        Console.WriteLine($"Caesar Encoded string: {encodedCaesar}");
+            
+        string decodedCaesar = CaesarCipher.Decode(encodedCaesar, shift);
+        Console.WriteLine($"Caesar Decoded string: {decodedCaesar}");    
+        
+        Console.WriteLine("Cracking the Caesar");
+        Console.WriteLine(CaesarCipher.Crack(encodedCaesar , true));
+        
+        string encodedScytale = ScytaleCipher.Encode(input, shift);
+        Console.WriteLine($"Scytale Encoded string: {encodedScytale}");
     }
 }
