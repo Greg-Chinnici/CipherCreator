@@ -8,9 +8,11 @@ public class LoremIpsumClient : ITextAPI
     private readonly HttpClient httpClient;
     
     private readonly string modifer; // short, medium, long, verylong
-
+    private readonly string[] possibleModifers = {"short" , "medium", "long" ,"verylong"};
     public LoremIpsumClient(string variation)
     {
+        if (possibleModifers.Contains(variation) == false) throw new ArgumentException("Invalid modifier variation");
+
         httpClient = new HttpClient();
         modifer = variation;
     } 

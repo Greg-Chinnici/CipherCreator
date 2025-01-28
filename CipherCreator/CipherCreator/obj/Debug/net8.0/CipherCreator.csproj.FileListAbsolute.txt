@@ -1,0 +1,15 @@
+/Users/student/Projects/cpsc370/CipherCreator/CipherCreator/CipherCreator/bin/Debug/net8.0/CipherCreator
+/Users/student/Projects/cpsc370/CipherCreator/CipherCreator/CipherCreator/bin/Debug/net8.0/CipherCreator.deps.json
+/Users/student/Projects/cpsc370/CipherCreator/CipherCreator/CipherCreator/bin/Debug/net8.0/CipherCreator.runtimeconfig.json
+/Users/student/Projects/cpsc370/CipherCreator/CipherCreator/CipherCreator/bin/Debug/net8.0/CipherCreator.dll
+/Users/student/Projects/cpsc370/CipherCreator/CipherCreator/CipherCreator/bin/Debug/net8.0/CipherCreator.pdb
+/Users/student/Projects/cpsc370/CipherCreator/CipherCreator/CipherCreator/obj/Debug/net8.0/CipherCreator.GeneratedMSBuildEditorConfig.editorconfig
+/Users/student/Projects/cpsc370/CipherCreator/CipherCreator/CipherCreator/obj/Debug/net8.0/CipherCreator.AssemblyInfoInputs.cache
+/Users/student/Projects/cpsc370/CipherCreator/CipherCreator/CipherCreator/obj/Debug/net8.0/CipherCreator.AssemblyInfo.cs
+/Users/student/Projects/cpsc370/CipherCreator/CipherCreator/CipherCreator/obj/Debug/net8.0/CipherCreator.csproj.CoreCompileInputs.cache
+/Users/student/Projects/cpsc370/CipherCreator/CipherCreator/CipherCreator/obj/Debug/net8.0/CipherCreator.dll
+/Users/student/Projects/cpsc370/CipherCreator/CipherCreator/CipherCreator/obj/Debug/net8.0/refint/CipherCreator.dll
+/Users/student/Projects/cpsc370/CipherCreator/CipherCreator/CipherCreator/obj/Debug/net8.0/CipherCreator.pdb
+/Users/student/Projects/cpsc370/CipherCreator/CipherCreator/CipherCreator/obj/Debug/net8.0/CipherCreator.genruntimeconfig.cache
+/Users/student/Projects/cpsc370/CipherCreator/CipherCreator/CipherCreator/obj/Debug/net8.0/ref/CipherCreator.dll
+/Users/student/Projects/cpsc370/CipherCreator/CipherCreator/CipherCreator/obj/Debug/net8.0/CipherCreator.sourcelink.json

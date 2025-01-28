@@ -5,7 +5,7 @@ using CipherCreator;
 public class CaesarCipher : IDecode, IEncode
 {
 # region Encode/Decode
-    public static string Encode(string input, int shift , bool shiftNumbers)
+    public static string Encode(string input, int shift , bool shiftNumbers = false)
     {
         if (string.IsNullOrWhiteSpace(input)) return string.Empty;
         if (shift % 26 == 0) return input;
@@ -14,27 +14,16 @@ public class CaesarCipher : IDecode, IEncode
         foreach (char c in input)
         {
             if (char.IsLetter(c))
-            {
                 output.Append(shiftLetter(c, shift));
-            }
             else if (char.IsDigit(c) && shiftNumbers)
-            {
                 output.Append(shiftDigit(c, shift));
-            }
             else
-            {
                 output.Append(c);
-            }
         }
 
         return output.ToString();
     }
-
-    public static string Encode(string input, int shift)
-    {
-        return Encode(input , shift , false); 
-    }
-
+    
 
     private static char shiftLetter(char letter, int shift)
     {
@@ -81,13 +70,12 @@ public class CaesarCipher : IDecode, IEncode
            
            double totalAbsoluteDifference = absoluteDifference(percents);
            
-           if (showProgress) Console.WriteLine($"shift {shift} or {26-shift}: {totalAbsoluteDifference} total absolute difference");
+           if (showProgress) Console.WriteLine($"shift {shift}: {totalAbsoluteDifference} total absolute difference");
 
-           if (totalAbsoluteDifference < bestDifference)
-           {
-               bestDifference = totalAbsoluteDifference;
-               bestShift = shift;
-           }
+           if (totalAbsoluteDifference > bestDifference) continue;
+           
+           bestDifference = totalAbsoluteDifference;
+           bestShift = shift;
 
         }
         Console.WriteLine($"Best shift is {bestShift} with a {bestDifference:00.00} difference.");
@@ -102,10 +90,10 @@ public class CaesarCipher : IDecode, IEncode
             .Where(c => char.IsLetter(c))
             .Select(c => char.ToUpper(c))
             .GroupBy(c => c)
-            .Select( g => new
+            .Select( group => new
                 {
-                    letter = g.Key , 
-                    percent = ((double) g.Count() / decodedText.Count(c => char.IsLetter(c))) * 100
+                    letter = group.Key , 
+                    percent = ((double) group.Count() / decodedText.Count(c => char.IsLetter(c))) * 100
                 }
             ).ToDictionary(x=> x.letter , x=> x.percent);
     }
@@ -114,7 +102,7 @@ public class CaesarCipher : IDecode, IEncode
     {
         
         return frequencies
-            .Sum(f => Math.Abs(f.Value - (percents.ContainsKey(f.Key) ? percents[f.Key] : 0)));
+            .Sum(freq => Math.Abs(freq.Value - (percents.ContainsKey(freq.Key) ? percents[freq.Key] : 0)));
     }
 #endregion   
     
