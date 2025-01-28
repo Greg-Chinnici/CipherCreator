@@ -20,6 +20,10 @@ public class ExternalAPITest
         
         string result = await service.FetchString();
         
+        
         Assert.NotNull(result);
     }
+
+    
+    
 }
